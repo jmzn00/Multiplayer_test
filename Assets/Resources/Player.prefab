@@ -5795,31 +5795,34 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   bulletImpact: {fileID: 2104596167982290479, guid: 69d9c7b6e3c203b429605258eb948688, type: 3}
-  maxHeat: 10
-  coolRate: 4
-  overHeatCoolRate: 5
   allGuns:
   - {fileID: 2891349468006511445}
   - {fileID: 7108552688686950627}
   - {fileID: 2702788068895087818}
-  muzzleFlash: {fileID: 3257443227523415221}
   playerHitImpact: {fileID: 2104596167982290479, guid: 54a0c53b51685d945b4838d0cd302b06, type: 3}
+  maxHealth: 100
+  currentHealth: 0
+  nametagYoffset: 2
+  nametag: {fileID: 4800746774607731426}
+  targetRotation: {x: 0, y: 180, z: 0}
+  hasSemiWeapon: 0
+  hasAutoWeapon: 0
+  autoWeaponPickup: {fileID: 7944634375877689242, guid: e75e80731dddccc4b827a4ef032f2b29, type: 3}
+  semiWeaponPickup: {fileID: 8743043036424045329, guid: 6ad33bf40e4826b4fb5c51bff0131eec, type: 3}
+  semiWeaponCooldownTime: 3
+  semiMuzzleFlash: {fileID: 5024457145438977288, guid: faad3badf1e6ad041b99191ced15b8a3, type: 3}
+  muzzleFlash: {fileID: 3257443227523415221}
   FartParticle: {fileID: 8634708575408538309, guid: c6d410d730863314486facc84e18abc5, type: 3}
   radius: 3
   maxDistance: 3
   canFart: 0
-  nametagYoffset: 2
-  nametag: {fileID: 4800746774607731426}
-  targetRotation: {x: 0, y: 180, z: 0}
-  maxHealth: 100
-  currentHealth: 0
-  isDead: 0
-  semiMuzzleFlash: {fileID: 5024457145438977288, guid: faad3badf1e6ad041b99191ced15b8a3, type: 3}
-  autoWeaponPickup: {fileID: 7944634375877689242, guid: e75e80731dddccc4b827a4ef032f2b29, type: 3}
-  semiWeaponPickup: {fileID: 8743043036424045329, guid: 6ad33bf40e4826b4fb5c51bff0131eec, type: 3}
+  maxHeat: 10
+  coolRate: 4
+  overHeatCoolRate: 5
   shotTimer: 0
   startTimer: 0
   canShootSemi: 0
+  playerPos: {fileID: 4733394995509350321}
 --- !u!114 &4669094028705791543
 MonoBehaviour:
   m_ObjectHideFlags: 0

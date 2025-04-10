@@ -7,16 +7,17 @@ TagManager:
   - Master
   - SemiWeaponPickup
   - AutoWeaponPickup
+  - Slope
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Character
   - Water
   - UI
   - Ground
   - Wall
-  - 
+  - Slope
   - 
   - 
   - 

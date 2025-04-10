@@ -47,6 +47,8 @@ MonoBehaviour:
   - SetGun
   - SetGunLocally
   - UpdateGunDisplay
+  - SyncRotation
+  - SyncRotationAndPosition
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
