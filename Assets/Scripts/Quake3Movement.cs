@@ -69,8 +69,8 @@ public class CPMPlayer : MonoBehaviour
     private void Start()
     {
         // Hide the cursor
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         if (playerView == null)
         {

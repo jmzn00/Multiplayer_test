@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         playerCamera = Camera.main;
 
         UI_Controller.instance.weaponTempSlider.maxValue = maxHeat;
-        UI_Controller.instance.semiWeaponSlider.maxValue = semiWeaponCooldownTime;
+        //UI_Controller.instance.semiWeaponSlider.maxValue = semiWeaponCooldownTime;
 
         UI_Controller.instance.healthSlider.maxValue = maxHealth;
         UI_Controller.instance.healthSlider.value = maxHealth;
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             HandleCursorLock();
 
 
-            UI_Controller.instance.semiWeaponSlider.value = shotTimer;
+            //UI_Controller.instance.semiWeaponSlider.value = shotTimer;
             UI_Controller.instance.weaponTempSlider.value = heatCounter;
 
             if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class UI_Controller : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class UI_Controller : MonoBehaviour
     public TMP_Text overheatedMessage;
     public Slider weaponTempSlider;
     public Slider healthSlider;
-    public Slider semiWeaponSlider;
+    public Slider timerSlider;
 
     [Header("UI")]
     public GameObject pauseScreen;
@@ -20,11 +21,23 @@ public class UI_Controller : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject settingsButtons;
     public bool isPaused = false;
+    public AudioMixer audioMixer;
 
     public string killfeedDead;
     public string killfeedKiller;
 
     public TMP_Text KilledByText;
+
+    public TMP_Text moneyValueText;
+    [Header("Shop")]
+    public GameObject ShopPanel;
+
+    public GameObject leaderboard;
+    public LeaderboardPlayer leaderboardPlayer;
+
+    public TMP_Text killsText;
+    public TMP_Text deathsText;
+    
 
 
     private void Awake()
@@ -32,6 +45,17 @@ public class UI_Controller : MonoBehaviour
         instance = this;
         CloseUI();
         KilledByText.gameObject.SetActive(false);
+        ShopPanel.gameObject.SetActive(false);
+    }
+
+    public void SfxSlider(float volume) 
+    {
+        audioMixer.SetFloat("SfxVolume", volume);
+    }
+
+    public void MainSlide(float volume) 
+    {
+        audioMixer.SetFloat("MainVolume", volume);
     }
 
     public void OpenUI() 
@@ -92,12 +116,21 @@ public class UI_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            OpenUI();
+            if (ShopPanel.activeInHierarchy) 
+            {
+                ShopPanel.gameObject.SetActive(false);
+            }
+            else 
+            {
+                OpenUI();
+            }
+                       
         }
+
         if(pauseScreen.activeInHierarchy && Cursor.lockState != CursorLockMode.None) 
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.visible = true;
         }
 
     }

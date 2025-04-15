@@ -31,6 +31,9 @@ public class PlayerSpawner : MonoBehaviour
 
     public void Die() 
     {
+
+        MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 1, 1);
+
         PhotonNetwork.Instantiate(deathEffect.name, player.transform.position, Quaternion.identity);
         PhotonNetwork.Destroy(player);
 

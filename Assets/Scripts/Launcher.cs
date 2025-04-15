@@ -43,6 +43,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject startButton;
 
     public GameObject roomTestButton;
+
+    public GameObject settingsPanel;
     
     void Start()
     {
@@ -52,10 +54,21 @@ public class Launcher : MonoBehaviourPunCallbacks
         loadingText.text = "Connecting To Network...";
 
         PhotonNetwork.ConnectUsingSettings();
+        settingsPanel.SetActive(false);
 
 #if UNITY_EDITOR
         roomTestButton.SetActive(true);
 #endif
+    }
+
+    public void OpenSettings() 
+    {
+        settingsPanel.gameObject.SetActive(true);
+    }
+
+    public void CloseSettings() 
+    {
+        settingsPanel.gameObject.SetActive(false);
     }
 
     void CloseMenus() 

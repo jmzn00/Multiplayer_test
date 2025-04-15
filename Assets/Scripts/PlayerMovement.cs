@@ -377,6 +377,7 @@ public class PlayerMovement : MonoBehaviourPun
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
+
         }
         else if (Cursor.lockState == CursorLockMode.None)
         {

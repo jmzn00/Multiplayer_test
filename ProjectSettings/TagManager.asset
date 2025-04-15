@@ -8,6 +8,8 @@ TagManager:
   - SemiWeaponPickup
   - AutoWeaponPickup
   - Slope
+  - Money
+  - NPC
   layers:
   - Default
   - TransparentFX
