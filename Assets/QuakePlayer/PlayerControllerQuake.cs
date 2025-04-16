@@ -169,7 +169,10 @@ public class PlayerControllerQuake : MonoBehaviourPun
 
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.Instantiate(moneyGameObject.name, transform.position, Quaternion.identity, 0, instantiationData);
+                if(moneyValue > 0) 
+                {
+                    PhotonNetwork.Instantiate(moneyGameObject.name, transform.position, Quaternion.identity, 0, instantiationData);
+                }
             }
             else
             {
@@ -180,7 +183,9 @@ public class PlayerControllerQuake : MonoBehaviourPun
             PlayerSpawner.instance.Die();
             MatchManager.instance.UpdateStatsSend(actor, 0, 1);
 
+            MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, (MoneyManager.instance.money / 2) * -1);
             MoneyManager.instance.money -= MoneyManager.instance.money / 2;
+            
 
 
 
@@ -190,7 +195,10 @@ public class PlayerControllerQuake : MonoBehaviourPun
     [PunRPC]
     public void RequestMoneyDrop(Vector3 position, int moneyValue)
     {
-        PhotonNetwork.Instantiate(moneyGameObject.name, position, Quaternion.identity, 0, new object[] { moneyValue });
+        if(moneyValue > 0) 
+        {
+            PhotonNetwork.Instantiate(moneyGameObject.name, position, Quaternion.identity, 0, new object[] { moneyValue });
+        }
     }
 
     public void AddMoneyLocally(int amount) 
@@ -198,7 +206,8 @@ public class PlayerControllerQuake : MonoBehaviourPun
         MoneyManager.instance.money += amount;
 
         UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
-        MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, MoneyManager.instance.money);
+        Debug.Log("MoneyManager: " + MoneyManager.instance.money);
+        MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, amount);
 
     }
 

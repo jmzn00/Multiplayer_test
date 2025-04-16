@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd01de9aa06fa7347a1d281bd0531abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyValue: 75
+  moneyValue: 100
   moneyGameObject: {fileID: 3735288457296604137}
 --- !u!1001 &4375915205740782099
 PrefabInstance:

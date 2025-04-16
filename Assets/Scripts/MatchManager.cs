@@ -6,6 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 using System;
+using System.Collections;
 
 public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -45,15 +46,17 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) 
+        if (Input.GetKey(KeyCode.Tab)) 
         {
-            if (UI_Controller.instance.leaderboard.activeInHierarchy) 
+
+                ShowLeaderboard();
+            
+        }
+        else 
+        {
+            if (UI_Controller.instance.leaderboard.activeInHierarchy)
             {
                 UI_Controller.instance.leaderboard.SetActive(false);
-            }
-            else 
-            {
-                ShowLeaderboard();
             }
         }
     }
@@ -212,38 +215,25 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             if (allPlayers[i].actor == actor) 
             {
+                Debug.Log("statType: " + statType);
                 switch (statType) 
                 {
                     case 0: //kills
                         allPlayers[i].kills += amount;
-                        Debug.Log("Player " + allPlayers[i].name + " : kills " + allPlayers[i].kills);
+                        //Debug.Log("Player " + allPlayers[i].name + " : kills " + allPlayers[i].kills);
                         break;
                     case 1: //deaths
                         allPlayers[i].deaths += amount;
-                        Debug.Log("Player " + allPlayers[i].name + " : deaths " + allPlayers[i].deaths);
+                        //Debug.Log("Player " + allPlayers[i].name + " : deaths " + allPlayers[i].deaths);
                         break;
-                }
-                if(i == index) 
-                {
-                    //UpdateStatsDisplay();
+                    case 4: // money
+                        allPlayers[i].money += amount;
+                        //Debug.Log("Player " + allPlayers[i].name + " : money : " + allPlayers[i].money);
+                        break;
                 }
 
                 break;
             }
-        }
-    }
-
-    public void UpdateStatsDisplay() 
-    {
-        if(allPlayers.Count > index) 
-        {
-            UI_Controller.instance.killsText.text = "Kills: " + allPlayers[index].kills;
-            UI_Controller.instance.deathsText.text = "Deaths: " + allPlayers[index].deaths;
-        }
-        else 
-        {
-            UI_Controller.instance.killsText.text = "Kills: 0";
-            UI_Controller.instance.deathsText.text = "Deaths: 0";
         }
     }
 }

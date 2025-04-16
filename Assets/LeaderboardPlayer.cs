@@ -13,6 +13,6 @@ public class LeaderboardPlayer : MonoBehaviour
         playerName.text = name;
         playerKills.text = kills.ToString();
         playerDeaths.text = deaths.ToString();
-        playerMoney.text = money.ToString();
+        playerMoney.text = money.ToString() + "$";
     }
 }

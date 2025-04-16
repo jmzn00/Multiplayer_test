@@ -19647,6 +19647,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 7291886662334938077}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1497942588119582706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19844,6 +19847,10 @@ PrefabInstance:
     - target: {fileID: 1223603932955313092, guid: 0b7dbb87bca3333428dc9548636d3fce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1847840895404462362, guid: 0b7dbb87bca3333428dc9548636d3fce, type: 3}
+      propertyPath: lifeTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7679015947068463273, guid: 0b7dbb87bca3333428dc9548636d3fce, type: 3}
       propertyPath: m_Name

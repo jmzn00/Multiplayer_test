@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3956294709524052120}
   - component: {fileID: 5378216257167041245}
   - component: {fileID: -1625453853119871466}
+  - component: {fileID: 1847840895404462362}
   m_Layer: 0
   m_Name: HitParticle
   m_TagString: Untagged
@@ -43,7 +44,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7679015947068463273}
   serializedVersion: 8
-  lengthInSec: 0.3
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4874,3 +4875,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &1847840895404462362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679015947068463273}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec6f2dc6b7130f479423d08a706758b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 0.25
