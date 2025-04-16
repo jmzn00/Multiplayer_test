@@ -5419,6 +5419,10 @@ MonoBehaviour:
   startButton: {fileID: 1872601097}
   roomTestButton: {fileID: 1903313304}
   settingsPanel: {fileID: 1203343442}
+  allMaps:
+  - Map 1
+  - Map2
+  changeMapBetweenRounds: 1
 --- !u!1001 &1422276943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7895,7 +7899,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1908582490}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

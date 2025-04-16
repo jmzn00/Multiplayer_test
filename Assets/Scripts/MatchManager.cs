@@ -7,6 +7,9 @@ using Photon.Realtime;
 using ExitGames.Client.Photon;
 using System;
 using System.Collections;
+using static UnityEngine.Rendering.ReloadAttribute;
+using Unity.Mathematics;
+
 
 public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -26,9 +29,23 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         NewPlayer,
         ListPlayers,
-        ChangeStat
+        ChangeStat,
+        NextMatch
     }
 
+    public enum GameState
+    {
+        Waiting,
+        Playing,
+        Ending
+    }
+
+    public int killsToWin = 3;
+    public Transform mapCamPoint;
+    public GameState state = GameState.Waiting;
+    public float waitAfterEnding = 5f;
+
+    public bool perpetual;
 
 
     void Start()
@@ -40,19 +57,21 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         else 
         {
             NewPlayerSend(PhotonNetwork.NickName);
+
+            state = GameState.Playing;
         }
     }
 
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.Tab)) 
+        if (Input.GetKey(KeyCode.Tab))
         {
 
-                ShowLeaderboard();
-            
+            ShowLeaderboard();
+
         }
-        else 
+        else if (state != GameState.Ending)
         {
             if (UI_Controller.instance.leaderboard.activeInHierarchy)
             {
@@ -106,6 +125,10 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 case EventCodes.ChangeStat:
                     UpdateStatsRecieve(data);
                     break;
+                case EventCodes.NextMatch:
+                    NextMatchRecieve();
+                    break;
+
             }
         }
     }
@@ -147,7 +170,9 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
     public void ListPlayersSend() 
     {
-        object[] package = new object[allPlayers.Count];
+        object[] package = new object[allPlayers.Count + 1];
+
+        package[0] = state;
 
         for(int i = 0; i < allPlayers.Count; i++) 
         {
@@ -159,7 +184,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
             piece[3] = allPlayers[i].deaths;
             piece[4] = allPlayers[i].money;
 
-            package[i] = piece;
+            package[i + 1] = piece;
         }
         PhotonNetwork.RaiseEvent(
             (byte)EventCodes.ListPlayers,
@@ -173,7 +198,9 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         allPlayers.Clear();
 
-        for(int i = 0; i < dataRecieved.Length; i++) 
+        state = (GameState)dataRecieved[0];
+
+        for(int i = 1; i < dataRecieved.Length; i++) 
         {
             object[] piece = (object[])dataRecieved[i];
 
@@ -189,9 +216,10 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
             if(PhotonNetwork.LocalPlayer.ActorNumber == player.actor) 
             {
-                index = i;
+                index = i - 1;
             }
         }
+        StateCheck();
     }
     public void UpdateStatsSend(int actorSending, int statToUpdate, int amountToChange) 
     {
@@ -235,6 +263,131 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
             }
         }
+        ScoreCheck();
+    }
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+
+        SceneManager.LoadScene(0);
+    }
+
+    void ScoreCheck() 
+    {
+        bool winnerFound = false;
+
+        foreach(PlayerInfo player in allPlayers) 
+        {
+            if(player.kills >= killsToWin && killsToWin > 0) 
+            {
+                winnerFound = true;
+                break;
+            }
+        }
+
+        if (winnerFound) 
+        {
+            if(PhotonNetwork.IsMasterClient && state != GameState.Ending) 
+            {
+                state = GameState.Ending;
+                ListPlayersSend();
+            }
+        }
+    }
+
+    void StateCheck() 
+    {
+        if(state == GameState.Ending) 
+        {
+            EndGame();    
+        }
+    }
+
+    void EndGame() 
+    {
+        state = GameState.Ending;
+
+        if (PhotonNetwork.IsMasterClient) 
+        {
+            PhotonNetwork.DestroyAll();
+        }
+
+        UI_Controller.instance.endScreen.SetActive(true);
+        ShowLeaderboard();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        Camera.main.transform.position = mapCamPoint.position;
+        Camera.main.transform.rotation = mapCamPoint.rotation;
+
+        StartCoroutine(EndCo());
+    }
+
+    private IEnumerator EndCo() 
+    {
+        yield return new WaitForSeconds(waitAfterEnding);
+
+        if (!perpetual) 
+        {
+            PhotonNetwork.AutomaticallySyncScene = false;
+            PhotonNetwork.LeaveRoom();
+        }
+        else 
+        {
+            if (PhotonNetwork.IsMasterClient) 
+            {
+                if (!Launcher.instance.changeMapBetweenRounds) 
+                {
+                    NextMatchSend();
+                }
+                else 
+                {
+                    int newLevel = UnityEngine.Random.Range(0, Launcher.instance.allMaps.Length);
+                    Debug.Log(newLevel);
+
+                    if (Launcher.instance.allMaps[newLevel] == SceneManager.GetActiveScene().name) 
+                    {
+                        NextMatchSend();
+                    }
+                    else 
+                    {
+                        PhotonNetwork.LoadLevel(Launcher.instance.allMaps[newLevel]);
+                    }
+                }
+                
+            }
+        }
+        
+    }
+
+    public void NextMatchSend() 
+    {
+        PhotonNetwork.RaiseEvent(
+            (byte)EventCodes.NextMatch,
+            null,
+            new RaiseEventOptions { Receivers = ReceiverGroup.All },
+            new SendOptions { Reliability = true }
+            );
+    }
+
+    public void NextMatchRecieve() 
+    {
+        state = GameState.Playing;
+
+        UI_Controller.instance.endScreen.SetActive(false);
+        UI_Controller.instance.leaderboard.SetActive(false);
+
+        foreach(PlayerInfo player in allPlayers) 
+        {
+            player.kills = 0;
+            player.deaths = 0;
+            player.money = 0;
+        }
+
+        PlayerSpawner.instance.SpawnPlayer();
+        
     }
 }
 

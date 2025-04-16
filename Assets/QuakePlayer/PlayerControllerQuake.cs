@@ -81,7 +81,6 @@ public class PlayerControllerQuake : MonoBehaviourPun
         GetMovementInput();
         HandleCursorLock();
         //Debug.Log(money);
-        //IsMaster();
     }
 
 
@@ -133,14 +132,18 @@ public class PlayerControllerQuake : MonoBehaviourPun
     private void LateUpdate()
     {
         if (!photonView.IsMine) { return; }
+        if(MatchManager.instance.state == MatchManager.GameState.Playing) 
+        {
+            CameraFollow();
+        }
+        else 
+        {
+            playerCamera.transform.position = MatchManager.instance.mapCamPoint.position;
+            playerCamera.transform.rotation = MatchManager.instance.mapCamPoint.rotation;
+        }
         
-        CameraFollow();        
     }
 
-    private void IsMaster() 
-    {
-        Debug.Log(PhotonNetwork.MasterClient);
-    }
 
     public float GetMagnitude() 
     {

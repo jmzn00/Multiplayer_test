@@ -37,6 +37,8 @@ public class UI_Controller : MonoBehaviour
 
     //public TMP_Text killsText;
     //public TMP_Text deathsText;
+
+    public GameObject endScreen;
     
 
 

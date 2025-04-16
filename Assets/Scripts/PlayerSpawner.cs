@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class PlayerSpawner : MonoBehaviour
 {
@@ -37,7 +38,26 @@ public class PlayerSpawner : MonoBehaviour
         PhotonNetwork.Instantiate(deathEffect.name, player.transform.position, Quaternion.identity);
         PhotonNetwork.Destroy(player);
 
-        Invoke("SpawnPlayer", 2f);
+        if(player != null) 
+        {
+            StartCoroutine(DieCo());
+        }
+        
+    }
+
+    public IEnumerator DieCo() 
+    {
+        PhotonNetwork.Destroy(player);
+        player = null;
+
+        yield return new WaitForSeconds(2f);
+
+        if(MatchManager.instance.state == MatchManager.GameState.Playing && player == null) 
+        {
+            SpawnPlayer();
+        }
+
+
     }
 
 }
