@@ -112,7 +112,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
             EventCodes theEvent = (EventCodes)photonEvent.Code;
             object[] data = (object[])photonEvent.CustomData;
 
-            Debug.Log("Recieved event" + theEvent);
+            //Debug.Log("Recieved event" + theEvent);
 
             switch (theEvent) 
             {
@@ -243,7 +243,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             if (allPlayers[i].actor == actor) 
             {
-                Debug.Log("statType: " + statType);
+                //Debug.Log("statType: " + statType);
                 switch (statType) 
                 {
                     case 0: //kills
@@ -327,6 +327,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private IEnumerator EndCo() 
     {
+
         yield return new WaitForSeconds(waitAfterEnding);
 
         if (!perpetual) 
@@ -336,6 +337,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
         else 
         {
+
             if (PhotonNetwork.IsMasterClient) 
             {
                 if (!Launcher.instance.changeMapBetweenRounds) 
@@ -344,8 +346,25 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 }
                 else 
                 {
+                    Debug.Log(Launcher.instance.availableMaps);
+                    /*
+                    if(Launcher.instance.availableMaps.Count > 0) 
+                    {
+                        int newLevel = UnityEngine.Random.Range(0, Launcher.instance.availableMaps.Count);
+                        Debug.Log("NewLevel: " + newLevel);
+                        PhotonNetwork.LoadLevel(Launcher.instance.availableMaps[newLevel]);
+                    }
+                    else 
+                    {
+                        Launcher.instance.availableMaps.Clear();
+                        Launcher.instance.availableMaps = new List<string>(Launcher.instance.mapNames);
+                        PhotonNetwork.LoadLevel(Launcher.instance.availableMaps[0]);
+                    }
+                    */
+
+
                     int newLevel = UnityEngine.Random.Range(0, Launcher.instance.allMaps.Length);
-                    Debug.Log(newLevel);
+                    Debug.Log("NewLevel: " + newLevel);
 
                     if (Launcher.instance.allMaps[newLevel] == SceneManager.GetActiveScene().name) 
                     {
@@ -355,6 +374,9 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     {
                         PhotonNetwork.LoadLevel(Launcher.instance.allMaps[newLevel]);
                     }
+                    
+                    
+                                        
                 }
                 
             }

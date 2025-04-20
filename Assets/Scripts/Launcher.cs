@@ -65,6 +65,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        availableMaps = new List<string>(mapNames);
+
+
     }
 
     public void OpenSettings() 
@@ -270,15 +274,26 @@ public class Launcher : MonoBehaviourPunCallbacks
             hasSetNick = true;
         }
     }
+    [SerializeField] public List<string> mapNames = new List<string>();
+    [SerializeField] private List<string> playedMaps = new List<string>();
+    public List<string> availableMaps;
+
 
     public void StartGame() 
     {
+        
+
         //PhotonNetwork.LoadLevel(levelToPlay);
-        int mapToLoad = Random.Range(0, allMaps.Length);
-        PhotonNetwork.LoadLevel(allMaps[mapToLoad]);
-        Debug.Log("startGame" + mapToLoad);
+        int mapToLoad = Random.Range(0, mapNames.Count - 1);
+        PhotonNetwork.LoadLevel(availableMaps[mapToLoad]);
+
+        playedMaps.Add(availableMaps[mapToLoad]);
+        availableMaps.RemoveAll(m => playedMaps.Contains(m));
+
+        //Debug.Log(availableMaps[mapToLoad]);
     }
 
+    
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
         if (PhotonNetwork.IsMasterClient) 

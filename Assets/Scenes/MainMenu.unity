@@ -1734,7 +1734,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 229227821}
   m_HandleRect: {fileID: 229227820}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5423,6 +5423,10 @@ MonoBehaviour:
   - Map 1
   - Map2
   changeMapBetweenRounds: 1
+  mapNames:
+  - Map 1
+  - Map2
+  playedMaps: []
 --- !u!1001 &1422276943
 PrefabInstance:
   m_ObjectHideFlags: 0

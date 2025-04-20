@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using Photon.Pun;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviourPun
@@ -7,6 +9,8 @@ public class NewMonoBehaviourScript : MonoBehaviourPun
     [SerializeField] private GameObject playerHitImpact;
 
     [SerializeField] private GameObject[] playerWeapons;
+
+    private List<GameObject> playerWeaponsList = WeaponManager.LocalPlayerInstance.playerWeaponList;
 
     private int damage = 0;
     private float fireRate = 0;
@@ -71,8 +75,8 @@ public class NewMonoBehaviourScript : MonoBehaviourPun
                 //AddWallImpact
             }
         }
-        PhotonNetwork.Instantiate(shootParticle.name, transform.position, Quaternion.LookRotation(ray.direction));
-        PhotonNetwork.Instantiate(hitParticle.name, hit.point, Quaternion.identity);
+        //PhotonNetwork.Instantiate(shootParticle.name, transform.position, Quaternion.LookRotation(ray.direction));
+        //PhotonNetwork.Instantiate(hitParticle.name, hit.point, Quaternion.identity);
     }
     int selectedGun = 0;
     private void Weapons() 
@@ -93,8 +97,13 @@ public class NewMonoBehaviourScript : MonoBehaviourPun
     private void SwitchWeapons() 
     {
         foreach(GameObject playerWeapon in playerWeapons) 
-        {
+        {           
             playerWeapon.gameObject.SetActive(false);
+        }
+
+        foreach (GameObject playerWeaponL in playerWeaponsList) 
+        {
+            Debug.Log(playerWeaponL.gameObject.name);
         }
 
         GameObject selectedWeapon = playerWeapons[selectedGun];

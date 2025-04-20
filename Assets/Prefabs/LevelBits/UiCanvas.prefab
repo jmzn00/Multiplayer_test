@@ -6168,6 +6168,9 @@ MonoBehaviour:
   item4_Button: {fileID: 1262734461517186652}
   buySound: {fileID: 5084298728169019980}
   errorSound: {fileID: 2804238663636789818}
+  pistolWeapon: {fileID: 7930582248899163518, guid: 5e523730ce0ec514faafc5d5f544a445, type: 3}
+  smgWeapon: {fileID: 2263091001542680533, guid: b8da8bc79ff99bd4990409a957a8cde8, type: 3}
+  rifleWeapon: {fileID: 2263091001542680533, guid: 1d88a15a75a466a4da406ae75de47430, type: 3}
 --- !u!82 &5084298728169019980
 AudioSource:
   m_ObjectHideFlags: 0
