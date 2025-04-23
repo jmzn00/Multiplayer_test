@@ -52,6 +52,12 @@ MonoBehaviour:
   - AddMoney
   - RequestMoneyDrop
   - RequestMoneyDestroy
+  - UpdateWeaponSelection
+  - SyncWeaponSelection
+  - RequestWeaponDestroy
+  - RequestDropWeapons
+  - SyncWeaponSwitch
+  - WeaponDestroy
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

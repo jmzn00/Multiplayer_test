@@ -176,11 +176,16 @@ public class PlayerControllerQuake : MonoBehaviourPun
                 {
                     PhotonNetwork.Instantiate(moneyGameObject.name, transform.position, Quaternion.identity, 0, instantiationData);
                 }
+                               
             }
             else
             {
                 photonView.RPC("RequestMoneyDrop", RpcTarget.MasterClient, transform.position, moneyValue);
             }
+
+            newPlayerWeapons playerWeapons = GetComponent<newPlayerWeapons>();
+            playerWeapons.DropWeapons();
+            
 
             health = 0;
             PlayerSpawner.instance.Die();
@@ -188,7 +193,13 @@ public class PlayerControllerQuake : MonoBehaviourPun
 
             MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, (MoneyManager.instance.money / 2) * -1);
             MoneyManager.instance.money -= MoneyManager.instance.money / 2;
-            
+
+            if (UI_Controller.instance.ShopPanel.activeInHierarchy) 
+            {
+                UI_Controller.instance.ShopPanel.SetActive(false);
+            }
+
+
 
 
 
@@ -209,7 +220,7 @@ public class PlayerControllerQuake : MonoBehaviourPun
         MoneyManager.instance.money += amount;
 
         UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
-        Debug.Log("MoneyManager: " + MoneyManager.instance.money);
+        //Debug.Log("MoneyManager: " + MoneyManager.instance.money);
         MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, amount);
 
     }

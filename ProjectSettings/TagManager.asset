@@ -10,6 +10,7 @@ TagManager:
   - Slope
   - Money
   - NPC
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Wall
   - Slope
   - Weapon
-  - 
-  - 
+  - Money
+  - Player
   - 
   - 
   - 

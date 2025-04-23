@@ -64,7 +64,7 @@ public class UI_Controller : MonoBehaviour
     {
         pauseScreen.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
-        timerSlider.gameObject.SetActive(false);
+        //timerSlider.gameObject.SetActive(false);
         isPaused = true;
     }
     public void CloseUI() 
@@ -73,7 +73,7 @@ public class UI_Controller : MonoBehaviour
         backButton.gameObject.SetActive(false);
         settingsMenu.gameObject.SetActive(false);
         settingsButtons.gameObject.SetActive(false);
-        timerSlider.gameObject.SetActive(true);
+        //timerSlider.gameObject.SetActive(true);
         isPaused = false;
     }
 

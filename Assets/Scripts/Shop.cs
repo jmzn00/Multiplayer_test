@@ -15,6 +15,7 @@ public class Shop : MonoBehaviourPun
     [SerializeField] GameObject pistolWeapon;
     [SerializeField] GameObject smgWeapon;
     [SerializeField] GameObject rifleWeapon;
+    [SerializeField] GameObject sniperWeapon;
 
     public static Shop instance;
 
@@ -34,8 +35,9 @@ public class Shop : MonoBehaviourPun
         {
             if (MoneyManager.instance.money >= price)
             {
-                Debug.Log("Bought First Item");
+                //Debug.Log("Bought First Item");
                 MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
                 UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
                 buySound.Play();
 
@@ -46,7 +48,7 @@ public class Shop : MonoBehaviourPun
             }
             else
             {
-                Debug.Log("Not enough money");
+                //Debug.Log("Not enough money");
                 errorSound.Play();
             }
         }
@@ -62,8 +64,9 @@ public class Shop : MonoBehaviourPun
         {
             if (MoneyManager.instance.money >= price)
             {
-                Debug.Log("Bought Second Item");
+                //Debug.Log("Bought Second Item");
                 MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
                 UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
                 buySound.Play();
 
@@ -74,7 +77,7 @@ public class Shop : MonoBehaviourPun
             }
             else
             {
-                Debug.Log("Not enough money");
+                //Debug.Log("Not enough money");
                 errorSound.Play();
             }
         }
@@ -89,8 +92,9 @@ public class Shop : MonoBehaviourPun
         {
             if (MoneyManager.instance.money >= price)
             {
-                Debug.Log("Bought Second Item");
+                //Debug.Log("Bought Second Item");
                 MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
                 UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
                 buySound.Play();
 
@@ -101,7 +105,7 @@ public class Shop : MonoBehaviourPun
             }
             else
             {
-                Debug.Log("Not enough money");
+                //Debug.Log("Not enough money");
                 errorSound.Play();
             }
         }
@@ -109,6 +113,29 @@ public class Shop : MonoBehaviourPun
 
     public void FourthItem() 
     {
-    
+        var player = PlayerControllerQuake.localPlayer;
+        int price = 1000;
+
+        if (player != null)
+        {
+            if (MoneyManager.instance.money >= price)
+            {
+                //Debug.Log("Bought Second Item");
+                MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
+                UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+                buySound.Play();
+
+                if (WeaponManager.LocalPlayerInstance != null)
+                {
+                    WeaponManager.LocalPlayerInstance.AddWeaponToList(sniperWeapon);
+                }
+            }
+            else
+            {
+                //Debug.Log("Not enough money");
+                errorSound.Play();
+            }
+        }
     }
 }

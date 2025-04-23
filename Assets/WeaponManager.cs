@@ -27,11 +27,11 @@ public class WeaponManager : MonoBehaviourPun
 
         if (playerWeapons != null)
         {
-            playerWeapons.AddWeapon(weaponPrefab);
+            playerWeapons.AddWeapon(weaponPrefab); 
         }
         else
         {
-            Debug.LogWarning("No playerWeapons component found!");
+            //Debug.LogWarning("No playerWeapons component found!");
         }
     }
 

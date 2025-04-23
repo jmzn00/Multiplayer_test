@@ -13,11 +13,13 @@ public class PlayerInteraction : MonoBehaviourPun
     
     void Update()
     {
+        if (!photonView.IsMine) { return; }
+
         if (Input.GetKeyDown(KeyCode.E)) 
         {
             PlayerInteract();
         }
-        AutoPickup();
+        //AutoPickup();
     }
 
     public LayerMask groundLayer;
@@ -43,6 +45,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
                         if (PhotonNetwork.IsMasterClient) 
                         {
+
                             PhotonNetwork.Destroy(moneyPickup.gameObject);
                         }
                         else 
@@ -57,6 +60,31 @@ public class PlayerInteraction : MonoBehaviourPun
             {
                 UI_Controller.instance.ShopPanel.SetActive(true);
             }
+            
+            if (hit.collider.tag == "Weapon")
+            {
+                string prefabName = hit.collider.GetComponent<newWeapon>().prefabName;
+                PhotonView view = hit.collider.GetComponent<PhotonView>();
+
+                //GameObject weaponPrefab = PhotonNetwork.Instantiate(prefabName, Vector3.zero, Quaternion.identity);
+                //PhotonView weaponPhotonView = weaponPrefab.GetComponent<PhotonView>();
+                GameObject weaponPrefab = Resources.Load<GameObject>(prefabName);
+                
+
+                WeaponManager.LocalPlayerInstance.AddWeaponToList(weaponPrefab);
+
+                if (view.IsMine) 
+                {
+                        PhotonNetwork.Destroy(hit.collider.gameObject);
+                }
+                else 
+                {
+                    view.RPC("WeaponDestroy", view.Owner, view.ViewID);
+                }
+
+                
+            }
+            
         }
     }
     private void AutoPickup()
