@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using NUnit.Framework;
 
 public class PlayerInteraction : MonoBehaviourPun
 {
@@ -59,32 +60,60 @@ public class PlayerInteraction : MonoBehaviourPun
             if(hit.collider.tag == "NPC") 
             {
                 UI_Controller.instance.ShopPanel.SetActive(true);
-            }
-            
+            }           
             if (hit.collider.tag == "Weapon")
             {
                 string prefabName = hit.collider.GetComponent<newWeapon>().prefabName;
                 PhotonView view = hit.collider.GetComponent<PhotonView>();
+                newPlayerWeapons nPw = GetComponent<newPlayerWeapons>();
 
-                //GameObject weaponPrefab = PhotonNetwork.Instantiate(prefabName, Vector3.zero, Quaternion.identity);
-                //PhotonView weaponPhotonView = weaponPrefab.GetComponent<PhotonView>();
-                GameObject weaponPrefab = Resources.Load<GameObject>(prefabName);
-                
+                bool weaponExists = false;
 
-                WeaponManager.LocalPlayerInstance.AddWeaponToList(weaponPrefab);
-
-                if (view.IsMine) 
+                foreach(GameObject weapon in nPw.playerWeaponsList) 
                 {
-                        PhotonNetwork.Destroy(hit.collider.gameObject);
+                    newWeapon pW = weapon.GetComponent<newWeapon>();
+
+                    Debug.Log("PrefabName: " + pW.prefabName);
+
+                    if(pW.prefabName == prefabName) 
+                    {
+                        weaponExists = true;
+                    }
                 }
-                else 
+
+                if (!weaponExists) 
+                {
+                    GameObject weaponPrefab = Resources.Load<GameObject>(prefabName);
+                    WeaponManager.LocalPlayerInstance.AddWeaponToList(weaponPrefab);
+
+                    if (view.IsMine)
+                    {
+                        PhotonNetwork.Destroy(hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        view.RPC("WeaponDestroy", view.Owner, view.ViewID);
+                    }
+                }                
+            }  
+            if(hit.collider.tag == "Item") 
+            {
+                string prefabName = hit.collider.GetComponent<Item>().prefabName;
+
+                GameObject itemPrefab = Resources.Load<GameObject>(prefabName);
+                WeaponManager.LocalPlayerInstance.AddItemToList(itemPrefab);
+
+                PhotonView view = hit.collider.GetComponent<PhotonView>();
+
+                if (view.IsMine)
+                {
+                    PhotonNetwork.Destroy(hit.collider.gameObject);
+                }
+                else
                 {
                     view.RPC("WeaponDestroy", view.Owner, view.ViewID);
                 }
-
-                
             }
-            
         }
     }
     private void AutoPickup()

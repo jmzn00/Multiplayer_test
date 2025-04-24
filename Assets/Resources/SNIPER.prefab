@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 3468637896879882461}
   - component: {fileID: 4512124142815171324}
   - component: {fileID: 2616150578254087595}
+  - component: {fileID: 1717122798119633806}
   m_Layer: 9
   m_Name: SNIPER
   m_TagString: Weapon
@@ -238,6 +239,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.06, y: 0.27, z: 1.56}
   m_Center: {x: 0.21, y: 0.03, z: 0.39}
+--- !u!54 &1717122798119633806
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263091001542680533}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2806469428561513074
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class Shop : MonoBehaviourPun
     [SerializeField] private Button item2_Button;
     [SerializeField] private Button item3_Button;
     [SerializeField] private Button item4_Button;
+    [SerializeField] private Button item5_Button;
 
     [SerializeField] AudioSource buySound; 
     [SerializeField] AudioSource errorSound;
@@ -16,6 +17,7 @@ public class Shop : MonoBehaviourPun
     [SerializeField] GameObject smgWeapon;
     [SerializeField] GameObject rifleWeapon;
     [SerializeField] GameObject sniperWeapon;
+    [SerializeField] GameObject crackPipe;
 
     public static Shop instance;
 
@@ -135,6 +137,35 @@ public class Shop : MonoBehaviourPun
             {
                 //Debug.Log("Not enough money");
                 errorSound.Play();
+            }
+        }
+    }
+
+    public void FifthItem() 
+    {
+        var player = PlayerControllerQuake.localPlayer;
+        int price = 2000;
+
+        Debug.Log("FifthItem");
+
+        if(player != null) 
+        {
+            if(MoneyManager.instance.money >= price) 
+            {
+                MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
+                UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+
+                if(WeaponManager.LocalPlayerInstance != null) 
+                {
+                    WeaponManager.LocalPlayerInstance.AddItemToList(crackPipe);
+                    buySound.Play();
+                }                                
+            }
+            else 
+            {
+                errorSound.Play();
+                Debug.Log("NotEnoughMoney");
             }
         }
     }

@@ -11,6 +11,7 @@ TagManager:
   - Money
   - NPC
   - Weapon
+  - Item
   layers:
   - Default
   - TransparentFX

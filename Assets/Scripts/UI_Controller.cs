@@ -14,6 +14,7 @@ public class UI_Controller : MonoBehaviour
     public Slider weaponTempSlider;
     public Slider healthSlider;
     public Slider timerSlider;
+    public Slider itemUseSlider;
 
     [Header("UI")]
     public GameObject pauseScreen;
