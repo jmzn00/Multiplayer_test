@@ -346,7 +346,6 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 }
                 else 
                 {
-                    Debug.Log(Launcher.instance.availableMaps);
                     /*
                     if(Launcher.instance.availableMaps.Count > 0) 
                     {
@@ -363,16 +362,15 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     */
 
 
-                    int newLevel = UnityEngine.Random.Range(0, Launcher.instance.allMaps.Length);
-                    Debug.Log("NewLevel: " + newLevel);
+                    int newLevel = UnityEngine.Random.Range(0, Launcher.instance.mapNames.Count);
 
-                    if (Launcher.instance.allMaps[newLevel] == SceneManager.GetActiveScene().name) 
+                    if (Launcher.instance.mapNames[newLevel] == SceneManager.GetActiveScene().name) 
                     {
                         NextMatchSend();
                     }
                     else 
                     {
-                        PhotonNetwork.LoadLevel(Launcher.instance.allMaps[newLevel]);
+                        PhotonNetwork.LoadLevel(Launcher.instance.mapNames[newLevel]);
                     }
                     
                     

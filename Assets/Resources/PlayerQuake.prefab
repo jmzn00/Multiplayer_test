@@ -19522,9 +19522,9 @@ GameObject:
   - component: {fileID: 1577020628397293553}
   - component: {fileID: 3865194129749152790}
   - component: {fileID: 1432813224559148915}
+  - component: {fileID: 6480823236475536638}
   - component: {fileID: 7291886662334938077}
   - component: {fileID: 8814567840216374671}
-  - component: {fileID: 6480823236475536638}
   - component: {fileID: 8280538743583068638}
   - component: {fileID: 2517030703912647129}
   - component: {fileID: 1497942588119582706}
@@ -19662,6 +19662,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &6480823236475536638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530951891393351236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f0a9605578e364aa14dfb16c73755d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerWeaponList: []
+  playerItemList: []
 --- !u!114 &7291886662334938077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19717,20 +19731,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   damageTextGameobject: {fileID: 6470192919791560105, guid: d2374361e72a662458978e430f14c3a0, type: 3}
---- !u!114 &6480823236475536638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6530951891393351236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0f0a9605578e364aa14dfb16c73755d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerWeaponList: []
-  playerItemList: []
 --- !u!114 &8280538743583068638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19747,6 +19747,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &2517030703912647129
 MonoBehaviour:
   m_ObjectHideFlags: 0

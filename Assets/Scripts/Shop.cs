@@ -18,6 +18,7 @@ public class Shop : MonoBehaviourPun
     [SerializeField] GameObject rifleWeapon;
     [SerializeField] GameObject sniperWeapon;
     [SerializeField] GameObject crackPipe;
+    [SerializeField] GameObject bong;
 
     public static Shop instance;
 
@@ -26,7 +27,6 @@ public class Shop : MonoBehaviourPun
     {
         instance = this;      
     }
-
     public void FirstItem()
     {
 
@@ -55,7 +55,6 @@ public class Shop : MonoBehaviourPun
             }
         }
     }
-
     public void SecondItem() 
     {
 
@@ -84,7 +83,6 @@ public class Shop : MonoBehaviourPun
             }
         }
     }
-
     public void ThirdItem() 
     {
         var player = PlayerControllerQuake.localPlayer;
@@ -112,7 +110,6 @@ public class Shop : MonoBehaviourPun
             }
         }
     }
-
     public void FourthItem() 
     {
         var player = PlayerControllerQuake.localPlayer;
@@ -140,7 +137,6 @@ public class Shop : MonoBehaviourPun
             }
         }
     }
-
     public void FifthItem() 
     {
         var player = PlayerControllerQuake.localPlayer;
@@ -163,6 +159,34 @@ public class Shop : MonoBehaviourPun
                 }                                
             }
             else 
+            {
+                errorSound.Play();
+                Debug.Log("NotEnoughMoney");
+            }
+        }
+    }
+    public void SixthItem()
+    {
+        var player = PlayerControllerQuake.localPlayer;
+        int price = 4000;
+
+        Debug.Log("SixthItem");
+
+        if (player != null)
+        {
+            if (MoneyManager.instance.money >= price)
+            {
+                MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
+                UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+
+                if (WeaponManager.LocalPlayerInstance != null)
+                {
+                    WeaponManager.LocalPlayerInstance.AddItemToList(bong);
+                    buySound.Play();
+                }
+            }
+            else
             {
                 errorSound.Play();
                 Debug.Log("NotEnoughMoney");

@@ -5,12 +5,6 @@ using NUnit.Framework;
 public class PlayerInteraction : MonoBehaviourPun
 {
     [SerializeField] private PlayerControllerQuake playerController;
-
-    void Start()
-    {
-        
-    }
-
     
     void Update()
     {
@@ -20,19 +14,20 @@ public class PlayerInteraction : MonoBehaviourPun
         {
             PlayerInteract();
         }
-        //AutoPickup();
     }
 
     public LayerMask groundLayer;
+    public LayerMask playerLayer;
     private void PlayerInteract() 
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         RaycastHit hit;
 
         
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, 5f)) 
+        if (Physics.SphereCast(ray.origin, 0.25f,  ray.direction, out hit, 2.5f, ~playerLayer)) 
         {
-            if(hit.collider.tag == "Money")
+            PhotonView view = hit.collider.GetComponent<PhotonView>();
+            if (hit.collider.tag == "Money")
             {
                 if (photonView.IsMine) 
                 {
@@ -64,7 +59,6 @@ public class PlayerInteraction : MonoBehaviourPun
             if (hit.collider.tag == "Weapon")
             {
                 string prefabName = hit.collider.GetComponent<newWeapon>().prefabName;
-                PhotonView view = hit.collider.GetComponent<PhotonView>();
                 newPlayerWeapons nPw = GetComponent<newPlayerWeapons>();
 
                 bool weaponExists = false;
@@ -72,8 +66,6 @@ public class PlayerInteraction : MonoBehaviourPun
                 foreach(GameObject weapon in nPw.playerWeaponsList) 
                 {
                     newWeapon pW = weapon.GetComponent<newWeapon>();
-
-                    Debug.Log("PrefabName: " + pW.prefabName);
 
                     if(pW.prefabName == prefabName) 
                     {
@@ -103,15 +95,13 @@ public class PlayerInteraction : MonoBehaviourPun
                 GameObject itemPrefab = Resources.Load<GameObject>(prefabName);
                 WeaponManager.LocalPlayerInstance.AddItemToList(itemPrefab);
 
-                PhotonView view = hit.collider.GetComponent<PhotonView>();
-
                 if (view.IsMine)
                 {
                     PhotonNetwork.Destroy(hit.collider.gameObject);
-                }
+                }   
                 else
                 {
-                    view.RPC("WeaponDestroy", view.Owner, view.ViewID);
+                    view.RPC("ItemDestroy", view.Owner, view.ViewID);
                 }
             }
         }

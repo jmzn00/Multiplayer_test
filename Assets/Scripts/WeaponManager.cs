@@ -31,10 +31,6 @@ public class WeaponManager : MonoBehaviourPun
         {
             playerWeapons.AddWeapon(weaponPrefab); 
         }
-        else
-        {
-            //Debug.LogWarning("No playerWeapons component found!");
-        }
     }
 
     public void AddItemToList(GameObject itemPrefab) 
@@ -46,12 +42,7 @@ public class WeaponManager : MonoBehaviourPun
         {
             playerItems.AddItem(itemPrefab);
             playerItemList.Add(itemPrefab);
-        }
-        else 
-        {
-            Debug.Log("PlayerItemsNull");
-        }
-        
+        }     
     }
 
     public List<GameObject> GetWeapons()
