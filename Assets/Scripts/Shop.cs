@@ -19,6 +19,7 @@ public class Shop : MonoBehaviourPun
     [SerializeField] GameObject sniperWeapon;
     [SerializeField] GameObject crackPipe;
     [SerializeField] GameObject bong;
+    [SerializeField] GameObject beer;
 
     public static Shop instance;
 
@@ -183,6 +184,34 @@ public class Shop : MonoBehaviourPun
                 if (WeaponManager.LocalPlayerInstance != null)
                 {
                     WeaponManager.LocalPlayerInstance.AddItemToList(bong);
+                    buySound.Play();
+                }
+            }
+            else
+            {
+                errorSound.Play();
+                Debug.Log("NotEnoughMoney");
+            }
+        }
+    }
+    public void SeventhItem()
+    {
+        var player = PlayerControllerQuake.localPlayer;
+        int price = 1000;
+
+        Debug.Log("SeventhItem");
+
+        if (player != null)
+        {
+            if (MoneyManager.instance.money >= price)
+            {
+                MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
+                UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+
+                if (WeaponManager.LocalPlayerInstance != null)
+                {
+                    WeaponManager.LocalPlayerInstance.AddItemToList(beer);
                     buySound.Play();
                 }
             }

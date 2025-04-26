@@ -2196,7 +2196,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5305503221124992359}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: SeventhItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2753,7 +2753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NONE
+  m_text: Beer - 1000$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7307,6 +7307,7 @@ MonoBehaviour:
   sniperWeapon: {fileID: 2263091001542680533, guid: a0308a5050cd825458bffeea479f4bf3, type: 3}
   crackPipe: {fileID: 8751576431147513281, guid: f4871ddde1881dc4482261d6108c4ce2, type: 3}
   bong: {fileID: 8974099110611568221, guid: edcdbf6fa2634844685feb94cb9fde46, type: 3}
+  beer: {fileID: 8751576431147513281, guid: d6338f7ee26179b438a73498fcbf49eb, type: 3}
 --- !u!82 &5084298728169019980
 AudioSource:
   m_ObjectHideFlags: 0

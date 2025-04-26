@@ -4925,7 +4925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabName: Bong
   healAmount: 50
-  cooldown: 10
+  cooldown: 7
 --- !u!114 &1254111991297044474
 MonoBehaviour:
   m_ObjectHideFlags: 0

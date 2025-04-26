@@ -68,6 +68,11 @@ public class PlayerItems : MonoBehaviourPun
             selectedItem = 1;
             SwitchItem();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            selectedItem = 2;
+            SwitchItem();
+        }
     }
     private void SwitchItem() 
     {
