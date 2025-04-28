@@ -13,6 +13,7 @@ public class PlayerItems : MonoBehaviourPun
 
     private int _healAmount;
     private float _cooldown;
+    private AudioClip _useSound;
 
     private float timer = 0f;
     Transform currentItem;
@@ -92,6 +93,7 @@ public class PlayerItems : MonoBehaviourPun
         currentItem = itemHolster.transform.GetChild(selectedItem);
         _healAmount = currentItem.gameObject.GetComponent<Item>().healAmount;
         _cooldown = currentItem.gameObject.GetComponent<Item>().cooldown;
+        _useSound = currentItem.gameObject.GetComponent<Item>().useSound;
 
         UI_Controller.instance.itemUseSlider.maxValue = _cooldown;           
     }
@@ -103,6 +105,7 @@ public class PlayerItems : MonoBehaviourPun
             PlayerControllerQuake playerController = GetComponent<PlayerControllerQuake>();
             playerController.HealPlayer(_healAmount);
             audioSource.PlayOneShot(healSound);
+            audioSource.PlayOneShot(_useSound);
         }      
     }
 

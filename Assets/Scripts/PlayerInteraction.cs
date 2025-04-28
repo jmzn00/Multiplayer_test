@@ -24,7 +24,7 @@ public class PlayerInteraction : MonoBehaviourPun
         RaycastHit hit;
 
         
-        if (Physics.SphereCast(ray.origin, 0.25f,  ray.direction, out hit, 2.5f, ~playerLayer)) 
+        if (Physics.SphereCast(ray.origin, 0.125f,  ray.direction, out hit, 2.5f, ~playerLayer)) 
         {
             PhotonView view = hit.collider.GetComponent<PhotonView>();
             if (hit.collider.tag == "Money")

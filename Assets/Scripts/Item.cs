@@ -6,6 +6,7 @@ public class Item : MonoBehaviour
     public string prefabName;
     public int healAmount;
     public float cooldown;
+    public AudioClip useSound;
 
     [PunRPC]
     public void ItemDestroy(int viewID)

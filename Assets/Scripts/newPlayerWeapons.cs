@@ -132,6 +132,8 @@ public class newPlayerWeapons : MonoBehaviourPun
     private float _rateOfFire;
     private bool _isAuto;
     private AudioClip _shootSound;
+    private GameObject activeWeapon;
+    public bool hasActiveWeapon = false;
     private void SwitchWeapon() 
     {
         foreach(GameObject playerWeapon in playerWeaponModelList) 
@@ -139,7 +141,7 @@ public class newPlayerWeapons : MonoBehaviourPun
             playerWeapon.gameObject.SetActive(false);
             //playerWeapon.gameObject.SetActive(false);
         }
-        GameObject activeWeapon = playerWeaponModelList[selectedWeapon];
+        activeWeapon = playerWeaponModelList[selectedWeapon];
         activeWeapon.gameObject.SetActive(true);
 
         newWeapon weaponScript = activeWeapon.GetComponent<newWeapon>();
@@ -158,8 +160,13 @@ public class newPlayerWeapons : MonoBehaviourPun
         {
             UI_Controller.instance.timerSlider.maxValue = _rateOfFire;
         }
+        hasActiveWeapon = true;
     }
 
+    public Transform GetCurrentWeaponPosition() 
+    {
+        return activeWeapon.transform;
+    }
 
     [SerializeField] private AudioSource audioSource;
 

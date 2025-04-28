@@ -71,6 +71,8 @@ public class PlayerControllerQuake : MonoBehaviourPun
             UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
         }
 
+        playerCamera.fieldOfView = 70;
+
     }
     private void Update()
     {
@@ -80,6 +82,7 @@ public class PlayerControllerQuake : MonoBehaviourPun
         HandleCursorLock();
         //Debug.Log(money);
     }
+
     private void FixedUpdate()
     {
         if (!photonView.IsMine) { return; }
@@ -237,9 +240,11 @@ public class PlayerControllerQuake : MonoBehaviourPun
 
             //Debug.Log(Cursor.lockState);
     }
+
+    [SerializeField] private Transform playerModelPos;
     private void CameraFollow() 
     {
-        Vector3 cameraPosition = new Vector3(rb.transform.position.x, rb.transform.position.y + 1, rb.transform.position.z);
+        Vector3 cameraPosition = new Vector3(playerModelPos.position.x, playerModelPos.position.y + 1.5f, playerModelPos.position.z) + playerModelPos.forward / 3;
         playerCamera.transform.position = cameraPosition;
 
         playerCamera.transform.rotation = Quaternion.Euler(_inputRot.x, _inputRot.y, 0f);

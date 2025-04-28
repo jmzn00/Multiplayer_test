@@ -4899,6 +4899,7 @@ MonoBehaviour:
   prefabName: Pipe
   healAmount: 25
   cooldown: 6
+  useSound: {fileID: 8300000, guid: 8db892010557da44b90a58237cbed003, type: 3}
 --- !u!114 &7276352891012657435
 MonoBehaviour:
   m_ObjectHideFlags: 0
