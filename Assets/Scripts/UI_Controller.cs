@@ -40,6 +40,10 @@ public class UI_Controller : MonoBehaviour
     //public TMP_Text deathsText;
 
     public GameObject endScreen;
+
+    public Slider beerSlider;
+
+    public TMP_Text currentTrackText;
     
 
 

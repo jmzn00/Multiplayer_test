@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 using Photon.Realtime;
 using Unity.VisualScripting;
 using System.Collections.Generic;
+using UnityEngine.UI;
 public class Launcher : MonoBehaviourPunCallbacks
 {
 
@@ -47,7 +48,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject settingsPanel;
 
     public string[] allMaps;
-    public bool changeMapBetweenRounds = true;
+    public bool changeMapBetweenRounds;
     
     void Start()
     {
@@ -126,7 +127,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             RoomOptions options = new RoomOptions();
             options.MaxPlayers = 8;
 
-            PhotonNetwork.CreateRoom(roomNameInput.text, options);
+            PhotonNetwork.CreateRoom(roomNameInput.text, options);            
 
             CloseMenus();
             loadingText.text = "Creating Room...";
@@ -278,8 +279,43 @@ public class Launcher : MonoBehaviourPunCallbacks
     {       
         //PhotonNetwork.LoadLevel(levelToPlay);
         int mapToLoad = Random.Range(0, mapNames.Count);
-        PhotonNetwork.LoadLevel(mapNames[mapToLoad]);
+        PhotonNetwork.LoadLevel(mapNames[selectedMap]);
     }
+
+    public TMP_Text selectedMapText;
+    int selectedMap = 0;
+
+    public void SwitchMap() 
+    {
+        if (!PhotonNetwork.IsMasterClient) { return; }
+      
+        if(selectedMap >= mapNames.Count - 1) 
+        {
+            selectedMap = 0;
+        }
+        else 
+        {
+            selectedMap++;
+        }
+        selectedMapText.text = "Selected map: " + mapNames[selectedMap];      
+    }
+
+    public void TogglePerpetual(bool toggle) 
+    {
+        if(!PhotonNetwork.IsMasterClient) { return; }
+        if(toggle == true) 
+        {
+            changeMapBetweenRounds = true;
+        }
+        else 
+        {
+            changeMapBetweenRounds = false;
+        }
+
+        Debug.Log("Perpetual: " + changeMapBetweenRounds);
+    }
+
+
 
     
     public override void OnMasterClientSwitched(Player newMasterClient)

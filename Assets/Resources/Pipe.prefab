@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1685833908821819885}
   - component: {fileID: 8798342298930319664}
   - component: {fileID: 3574016328542041693}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 5282149528204364495}
   - component: {fileID: 6901566795555761418}
   - component: {fileID: 7080756579733522150}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Pipe
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -4879,7 +4879,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8751576431147513281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f711df2ba8fe9774da078d69da28a8d5, type: 3}
   m_Name: 
@@ -4900,6 +4900,8 @@ MonoBehaviour:
   healAmount: 25
   cooldown: 6
   useSound: {fileID: 8300000, guid: 8db892010557da44b90a58237cbed003, type: 3}
+  _itemAmount: 10
+  singleUse: 0
 --- !u!114 &7276352891012657435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5049,15 +5051,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7030219592342931679, guid: b9af32b6f49cf4b4dabcc71254ef1503, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -6730946337732306312, guid: b9af32b6f49cf4b4dabcc71254ef1503, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -2778209916945575335, guid: b9af32b6f49cf4b4dabcc71254ef1503, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -240874572912944931, guid: b9af32b6f49cf4b4dabcc71254ef1503, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -5069,11 +5071,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b9af32b6f49cf4b4dabcc71254ef1503, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4890988228939194271, guid: b9af32b6f49cf4b4dabcc71254ef1503, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

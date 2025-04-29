@@ -152,10 +152,11 @@ public class Shop : MonoBehaviourPun
                 MoneyManager.instance.money -= price;
                 MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
                 UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+                int itemAmount = crackPipe.GetComponent<Item>()._itemAmount;
 
-                if(WeaponManager.LocalPlayerInstance != null) 
+                if (WeaponManager.LocalPlayerInstance != null) 
                 {
-                    WeaponManager.LocalPlayerInstance.AddItemToList(crackPipe);
+                    WeaponManager.LocalPlayerInstance.AddItemToList(crackPipe, itemAmount);
                     buySound.Play();
                 }                                
             }
@@ -180,10 +181,11 @@ public class Shop : MonoBehaviourPun
                 MoneyManager.instance.money -= price;
                 MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
                 UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+                int itemAmount = bong.GetComponent<Item>()._itemAmount;
 
                 if (WeaponManager.LocalPlayerInstance != null)
                 {
-                    WeaponManager.LocalPlayerInstance.AddItemToList(bong);
+                    WeaponManager.LocalPlayerInstance.AddItemToList(bong, itemAmount);
                     buySound.Play();
                 }
             }
@@ -208,10 +210,11 @@ public class Shop : MonoBehaviourPun
                 MoneyManager.instance.money -= price;
                 MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
                 UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+                int itemAmount = beer.GetComponent<Item>()._itemAmount;
 
                 if (WeaponManager.LocalPlayerInstance != null)
                 {
-                    WeaponManager.LocalPlayerInstance.AddItemToList(beer);
+                    WeaponManager.LocalPlayerInstance.AddItemToList(beer, itemAmount);
                     buySound.Play();
                 }
             }

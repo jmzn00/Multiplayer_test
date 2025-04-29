@@ -8,6 +8,7 @@ public class NetworkWeapon : MonoBehaviour, IPunInstantiateMagicCallback
         object[] instData = info.photonView.InstantiationData;
         int holsterViewID = (int)instData[0];
 
+
         PhotonView holsterView = PhotonView.Find(holsterViewID);
         if (holsterView != null)
         {

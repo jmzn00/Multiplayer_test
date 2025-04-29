@@ -64,6 +64,7 @@ public class PlayerControllerQuake : MonoBehaviourPun
         {
             localPlayer = this;
             playerCamera = Camera.main;
+            playerCamera.fieldOfView = 70;
             health = maxHealth;
             
             UI_Controller.instance.healthSlider.maxValue = maxHealth;
@@ -71,7 +72,7 @@ public class PlayerControllerQuake : MonoBehaviourPun
             UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
         }
 
-        playerCamera.fieldOfView = 70;
+        
 
     }
     private void Update()

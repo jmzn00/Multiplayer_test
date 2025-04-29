@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5282149528204364495}
   - component: {fileID: 6901566795555761418}
   - component: {fileID: 7080756579733522150}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Beer
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8751576431147513281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f711df2ba8fe9774da078d69da28a8d5, type: 3}
   m_Name: 
@@ -62,10 +62,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb250208f97877446bf29bd19feabe72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabName: Pipe
+  prefabName: Beer
   healAmount: 10
   cooldown: 3
   useSound: {fileID: 8300000, guid: 326501cecbfd0d346ba16489c182089a, type: 3}
+  _itemAmount: 10
+  singleUse: 1
 --- !u!114 &7276352891012657435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +153,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.37, y: 0.14, z: 0.12}
+  m_Size: {x: 0.16, y: 0.38, z: 0.12}
   m_Center: {x: 0, y: 0.038, z: 0}
 --- !u!1001 &8755481781501620108
 PrefabInstance:
@@ -161,9 +163,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2452442652342226281}
     m_Modifications:
+    - target: {fileID: 677046435519558830, guid: 075ee13db9409e84f88bac9810e46b6f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4813966614497568525, guid: 075ee13db9409e84f88bac9810e46b6f, type: 3}
       propertyPath: m_Name
       value: beer-cans
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813966614497568525, guid: 075ee13db9409e84f88bac9810e46b6f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5297769789333700023, guid: 075ee13db9409e84f88bac9810e46b6f, type: 3}
       propertyPath: m_LocalScale.x
@@ -183,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5297769789333700023, guid: 075ee13db9409e84f88bac9810e46b6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.125
       objectReference: {fileID: 0}
     - target: {fileID: 5297769789333700023, guid: 075ee13db9409e84f88bac9810e46b6f, type: 3}
       propertyPath: m_LocalPosition.z

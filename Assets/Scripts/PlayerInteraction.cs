@@ -91,18 +91,39 @@ public class PlayerInteraction : MonoBehaviourPun
             if(hit.collider.tag == "Item") 
             {
                 string prefabName = hit.collider.GetComponent<Item>().prefabName;
+                int itemAmount = hit.collider.GetComponent<Item>()._itemAmount;
 
-                GameObject itemPrefab = Resources.Load<GameObject>(prefabName);
-                WeaponManager.LocalPlayerInstance.AddItemToList(itemPrefab);
 
-                if (view.IsMine)
+                Debug.Log("pickedUpItemAmount: " + itemAmount);
+
+                PlayerItems playerItems = GetComponent<PlayerItems>();
+
+                bool itemExists = false;
+
+                foreach(GameObject item in playerItems.playerItems) 
                 {
-                    PhotonNetwork.Destroy(hit.collider.gameObject);
-                }   
-                else
-                {
-                    view.RPC("ItemDestroy", view.Owner, view.ViewID);
+                    Item playerItem = item.GetComponent<Item>();
+
+                    if(playerItem.prefabName == prefabName) 
+                    {
+                        itemExists = true;
+                    }
                 }
+
+                if (!itemExists) 
+                {
+                    GameObject itemPrefab = Resources.Load<GameObject>(prefabName);
+                    WeaponManager.LocalPlayerInstance.AddItemToList(itemPrefab, itemAmount);
+
+                    if (view.IsMine)
+                    {
+                        PhotonNetwork.Destroy(hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        view.RPC("ItemDestroy", view.Owner, view.ViewID);
+                    }
+                }                
             }
         }
     }

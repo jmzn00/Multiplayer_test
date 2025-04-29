@@ -59,6 +59,8 @@ MonoBehaviour:
   - SyncWeaponSwitch
   - WeaponDestroy
   - ItemDestroy
+  - SwitchMap
+  - UpdateMapText
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

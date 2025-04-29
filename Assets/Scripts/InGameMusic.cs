@@ -10,8 +10,6 @@ public class InGameMusic : MonoBehaviour
     [SerializeField] private AudioClip[] backgroundMusic;
     [SerializeField] private AudioSource audioSource;
 
-    [SerializeField] private TextMeshProUGUI currentTrackText;
-
     private int currentTrack = 0;
     private void Awake()
     {
@@ -50,7 +48,7 @@ public class InGameMusic : MonoBehaviour
         }
 
         audioSource.clip = backgroundMusic[currentTrack];
-        currentTrackText.text = "Current Track: " + audioSource.clip.name;
+        UI_Controller.instance.currentTrackText.text = "Current Track: " + audioSource.clip.name;
         audioSource.Play();
         currentTrack++;        
         

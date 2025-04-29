@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3250885393835460232}
   - component: {fileID: 3128461540848042038}
   - component: {fileID: 8456498325921950089}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 1254111991297044474}
   - component: {fileID: 5999605131989268798}
   - component: {fileID: 2251854625337763586}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Bong
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -4927,6 +4927,8 @@ MonoBehaviour:
   healAmount: 50
   cooldown: 7
   useSound: {fileID: 8300000, guid: 7c9e97246ebc58548a5f04f52c897fdf, type: 3}
+  _itemAmount: 10
+  singleUse: 0
 --- !u!114 &1254111991297044474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4934,7 +4936,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8974099110611568221}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f711df2ba8fe9774da078d69da28a8d5, type: 3}
   m_Name: 
@@ -5077,7 +5079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2ce2c2c0eb4895545a97f433576273a4, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

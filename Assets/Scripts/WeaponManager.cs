@@ -33,16 +33,17 @@ public class WeaponManager : MonoBehaviourPun
         }
     }
 
-    public void AddItemToList(GameObject itemPrefab) 
+    public void AddItemToList(GameObject itemPrefab, int itemAmount) 
     {
         PlayerItems playerItems = GetComponent<PlayerItems>();
         //Debug.Log("AddedItem: " + itemPrefab.name);
 
         if(playerItems != null) 
         {
-            playerItems.AddItem(itemPrefab);
+            playerItems.AddItem(itemPrefab, itemAmount);
             playerItemList.Add(itemPrefab);
-        }     
+        }
+        Debug.Log("AddedItemToListItemAmount: " + itemAmount);
     }
 
     public List<GameObject> GetWeapons()

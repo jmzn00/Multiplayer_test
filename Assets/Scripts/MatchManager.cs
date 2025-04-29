@@ -7,8 +7,6 @@ using Photon.Realtime;
 using ExitGames.Client.Photon;
 using System;
 using System.Collections;
-using static UnityEngine.Rendering.ReloadAttribute;
-using Unity.Mathematics;
 
 
 public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
