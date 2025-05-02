@@ -11,6 +11,7 @@ public class newWeapon : MonoBehaviour
     public bool isAuto;
     public string prefabName;
     public AudioClip shootSound;
+    public int soundIndex;
 
 
     [PunRPC]

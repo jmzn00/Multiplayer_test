@@ -28,6 +28,11 @@ public class PlayerItems : MonoBehaviourPun
 
         ItemScroll();
 
+        if (Input.GetKeyDown(KeyCode.B)) 
+        {
+            ToggleShop();
+        }
+
         if (Input.GetMouseButtonDown(1)) 
         {
             if (currentItem.gameObject.GetComponent<Item>().singleUse) 
@@ -59,6 +64,21 @@ public class PlayerItems : MonoBehaviourPun
 
         UI_Controller.instance.itemUseSlider.value = timer;
 
+    }
+    bool openShop;
+    public void ToggleShop() 
+    {
+        openShop = !openShop;
+
+        if (openShop) 
+        {
+            UI_Controller.instance.ShopPanel.SetActive(true);
+        }
+        else 
+        {
+            UI_Controller.instance.ShopPanel.SetActive(false);
+        }
+        
     }
 
     public Transform GetCurrentItemTransform() 
@@ -154,17 +174,27 @@ public class PlayerItems : MonoBehaviourPun
 
         
     }
-
+    
     public void DropItem() 
     {
         if (!photonView.IsMine) { return; }
 
+        GameObject dropped;
         Transform item = itemHolster.transform.GetChild(selectedItem);
-        Debug.Log("Dropped: " + itemHolster.transform.GetChild(selectedItem).name);
+        
 
         object[] instData = new object[] { 0, item.GetComponent<Item>()._itemAmount };
-        GameObject dropped = PhotonNetwork.Instantiate(playerItems[selectedItem].gameObject.GetComponent<Item>().prefabName, itemHolster.transform.position, itemHolster.transform.rotation, 0, instData);
-        Rigidbody rb = dropped.gameObject.GetComponent<Rigidbody>();
+
+        if (item.GetComponent<Item>()._itemAmount <= 0) 
+        {
+            dropped = PhotonNetwork.Instantiate(playerItems[selectedItem].gameObject.GetComponent<Item>().destroyedVersion.gameObject.GetComponent<Item>().prefabName, itemHolster.transform.position, itemHolster.transform.rotation, 0, instData);
+        }
+        else 
+        {
+            dropped = PhotonNetwork.Instantiate(playerItems[selectedItem].gameObject.GetComponent<Item>().prefabName, itemHolster.transform.position, itemHolster.transform.rotation, 0, instData);
+        }
+
+            Rigidbody rb = dropped.gameObject.GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.isKinematic = false;
 
@@ -200,12 +230,13 @@ public class PlayerItems : MonoBehaviourPun
 
             object[] instData = new object[] { 0 , item.GetComponent<Item>()._itemAmount};
             GameObject dropped = PhotonNetwork.Instantiate(playerItems[i].gameObject.GetComponent<Item>().prefabName, itemHolster.transform.position, itemHolster.transform.rotation, 0, instData);
+            Debug.Log(dropped.gameObject.name);
             Rigidbody rb = dropped.gameObject.GetComponent<Rigidbody>();
             rb.useGravity = true;
-            rb.isKinematic = false;
-                         
+            rb.isKinematic = false;          
         }
         hasItem = false;
+        UI_Controller.instance.beerSlider.value = 0;
     }
 
 

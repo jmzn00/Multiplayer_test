@@ -145,12 +145,16 @@ public class PlayerControllerQuake : MonoBehaviourPun
     {
         return vel.magnitude;
     }
-    [PunRPC]
-    public void DealDamage(string damagerNickname, int damageAmount, int actor) 
+    public int GetHealth() 
     {
-        TakeDamage(damagerNickname, damageAmount, actor);
+        return health;
     }
-    private void TakeDamage(string damagerNickname, int damageAmount, int actor) 
+    [PunRPC]
+    public void DealDamage(int damageAmount, int actor) 
+    {
+        TakeDamage(damageAmount, actor);
+    }
+    private void TakeDamage(int damageAmount, int actor) 
     {
         if (!photonView.IsMine) { return; }
 

@@ -165,7 +165,8 @@ MonoBehaviour:
   range: 30
   isAuto: 1
   prefabName: SMG
-  shootSound: {fileID: 8300000, guid: 6a74b76328440034ea2671ee78d48674, type: 3}
+  shootSound: {fileID: 8300000, guid: f2b7b21877e79c646b35a9b00f43b29b, type: 3}
+  soundIndex: 1
 --- !u!114 &5843891247194685598
 MonoBehaviour:
   m_ObjectHideFlags: 0

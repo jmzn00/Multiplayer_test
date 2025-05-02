@@ -19951,6 +19951,7 @@ GameObject:
   - component: {fileID: 1497942588119582706}
   - component: {fileID: 7815569184893875277}
   - component: {fileID: 7862608973084750105}
+  - component: {fileID: 3345420038265180019}
   - component: {fileID: 2273077607024772767}
   - component: {fileID: 721473832925297012}
   - component: {fileID: 2975550074193028730}
@@ -20246,6 +20247,23 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 786013d54fc2d644d80eb6c4f600b285, type: 2}
   - {fileID: 2100000, guid: 6b05ee388a7963c4f87f831d24b25c5f, type: 2}
   playerModel: {fileID: 954433522810718681}
+--- !u!114 &3345420038265180019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530951891393351236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78535767e2ffc044a03210758103819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: 31df533ea171195479f967fcd6971f02, type: 3}
+  - {fileID: 8300000, guid: f2b7b21877e79c646b35a9b00f43b29b, type: 3}
+  - {fileID: 8300000, guid: 487a2a570183c3842a4348d76cb91a0e, type: 3}
+  mixerGroup: {fileID: 8060081393950309516, guid: ad30e99844fa7e841941a63794e1c2ba, type: 2}
 --- !u!114 &2273077607024772767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20389,7 +20407,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6530951891393351236}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8060081393950309516, guid: ad30e99844fa7e841941a63794e1c2ba, type: 2}
   m_audioClip: {fileID: 8300000, guid: 185bf8ad4959be649b5f52616b9748ec, type: 3}

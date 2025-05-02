@@ -167,6 +167,7 @@ MonoBehaviour:
   isAuto: 0
   prefabName: SNIPER
   shootSound: {fileID: 8300000, guid: 487a2a570183c3842a4348d76cb91a0e, type: 3}
+  soundIndex: 2
 --- !u!114 &7761338466288487202
 MonoBehaviour:
   m_ObjectHideFlags: 0

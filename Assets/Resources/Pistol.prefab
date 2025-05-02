@@ -275,6 +275,7 @@ MonoBehaviour:
   isAuto: 0
   prefabName: Pistol
   shootSound: {fileID: 8300000, guid: 31df533ea171195479f967fcd6971f02, type: 3}
+  soundIndex: 0
 --- !u!114 &1812566113342057106
 MonoBehaviour:
   m_ObjectHideFlags: 0

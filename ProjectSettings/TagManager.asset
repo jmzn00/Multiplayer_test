@@ -12,6 +12,8 @@ TagManager:
   - NPC
   - Weapon
   - Item
+  - DestroyedItem
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - Money
   - Player
   - Item
-  - 
+  - Grenade
   - 
   - 
   - 

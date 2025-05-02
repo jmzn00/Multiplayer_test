@@ -20,6 +20,9 @@ public class Shop : MonoBehaviourPun
     [SerializeField] GameObject crackPipe;
     [SerializeField] GameObject bong;
     [SerializeField] GameObject beer;
+    [SerializeField] GameObject energyBeer;
+    [SerializeField] GameObject voidLauncherWeapon;
+    [SerializeField] GameObject GrenadeLauncherWeapon;
 
     public static Shop instance;
 
@@ -222,6 +225,89 @@ public class Shop : MonoBehaviourPun
             {
                 errorSound.Play();
                 Debug.Log("NotEnoughMoney");
+            }
+        }
+    }
+    public void EighthItem()
+    {
+        var player = PlayerControllerQuake.localPlayer;
+        int price = 2000;
+
+        Debug.Log("SeventhItem");
+
+        if (player != null)
+        {
+            if (MoneyManager.instance.money >= price)
+            {
+                MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
+                UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+                int itemAmount = energyBeer.GetComponent<Item>()._itemAmount;
+
+                if (WeaponManager.LocalPlayerInstance != null)
+                {
+                    WeaponManager.LocalPlayerInstance.AddItemToList(energyBeer, itemAmount);
+                    buySound.Play();
+                }
+            }
+            else
+            {
+                errorSound.Play();
+                Debug.Log("NotEnoughMoney");
+            }
+        }
+    }
+    public void NinthItem()
+    {
+        var player = PlayerControllerQuake.localPlayer;
+        int price = 2000;
+
+        if (player != null)
+        {
+            if (MoneyManager.instance.money >= price)
+            {
+                MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
+                UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+
+                if (WeaponManager.LocalPlayerInstance != null)
+                {
+                    WeaponManager.LocalPlayerInstance.AddWeaponToList(voidLauncherWeapon);
+                    buySound.Play();
+                }
+            }
+            else
+            {
+                errorSound.Play();
+                Debug.Log("NotEnoughMoney");
+            }
+        }
+    }
+    public void TenthItem()
+    {
+
+        var player = PlayerControllerQuake.localPlayer;
+        int price = 3000;
+
+        if (player != null)
+        {
+            if (MoneyManager.instance.money >= price)
+            {
+                //Debug.Log("Bought First Item");
+                MoneyManager.instance.money -= price;
+                MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 4, -price);
+                UI_Controller.instance.moneyValueText.text = MoneyManager.instance.money.ToString();
+                buySound.Play();
+
+                if (WeaponManager.LocalPlayerInstance != null)
+                {
+                    WeaponManager.LocalPlayerInstance.AddWeaponToList(GrenadeLauncherWeapon);
+                }
+            }
+            else
+            {
+                //Debug.Log("Not enough money");
+                errorSound.Play();
             }
         }
     }

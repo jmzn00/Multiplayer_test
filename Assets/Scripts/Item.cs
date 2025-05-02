@@ -8,8 +8,9 @@ public class Item : MonoBehaviourPun, IPunInstantiateMagicCallback
     public int healAmount;
     public float cooldown;
     public AudioClip useSound;
-    public int _itemAmount = 10;
+    public int _itemAmount;
     public bool singleUse;
+    public GameObject destroyedVersion;
 
     [PunRPC]
     public void ItemDestroy(int viewID)

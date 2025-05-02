@@ -4929,6 +4929,7 @@ MonoBehaviour:
   useSound: {fileID: 8300000, guid: 7c9e97246ebc58548a5f04f52c897fdf, type: 3}
   _itemAmount: 10
   singleUse: 0
+  destroyedVersion: {fileID: 0}
 --- !u!114 &1254111991297044474
 MonoBehaviour:
   m_ObjectHideFlags: 0

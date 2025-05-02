@@ -132,6 +132,7 @@ public class newPlayerWeapons : MonoBehaviourPun
     private float _rateOfFire;
     private bool _isAuto;
     private AudioClip _shootSound;
+    private int _soundIndex;
     private GameObject activeWeapon;
     public bool hasActiveWeapon = false;
     private void SwitchWeapon() 
@@ -154,6 +155,7 @@ public class newPlayerWeapons : MonoBehaviourPun
             _rateOfFire = weaponScript.rateOfFire;
             _isAuto = weaponScript.isAuto;
             _shootSound = weaponScript.shootSound;
+            _soundIndex = weaponScript.soundIndex;
 
         }
         if (photonView.IsMine) 
@@ -183,7 +185,8 @@ public class newPlayerWeapons : MonoBehaviourPun
                 {
                     SphereCast();
                     timer = 0;
-                    audioSource.PlayOneShot(_shootSound);
+                    //audioSource.PlayOneShot(_shootSound);
+                    photonView.RPC("PlaySoundAtPosition", RpcTarget.All, _soundIndex, transform.position);
                 }
             }
         }
@@ -195,7 +198,8 @@ public class newPlayerWeapons : MonoBehaviourPun
                 {
                     SphereCast();
                     timer = 0;
-                    audioSource.PlayOneShot(_shootSound);
+                    //audioSource.PlayOneShot(_shootSound);
+                    photonView.RPC("PlaySoundAtPosition", RpcTarget.All,_soundIndex, transform.position);
                 }
             }
         }
@@ -226,7 +230,7 @@ public class newPlayerWeapons : MonoBehaviourPun
                         return;                    
                     }
 
-                        hit.collider.gameObject.GetPhotonView().RPC("DealDamage", RpcTarget.All, photonView.Owner.NickName, _damage, PhotonNetwork.LocalPlayer.ActorNumber);
+                        hit.collider.gameObject.GetPhotonView().RPC("DealDamage", RpcTarget.All, _damage, PhotonNetwork.LocalPlayer.ActorNumber);
                         PhotonNetwork.Instantiate(playerHitParticle.name, hit.point, Quaternion.identity);
 
                         GameObject damageText = Instantiate(damageTextGameobject, hit.point + textOffset, transform.rotation);
