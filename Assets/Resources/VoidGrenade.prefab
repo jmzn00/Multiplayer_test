@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 15
-  instantiateForceAmount: 50
-  applyForceAmount: 100
+  instantiateForceAmount: 75
+  applyForceAmount: 50
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048

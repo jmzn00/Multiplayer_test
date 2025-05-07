@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a717665a57b4c464eaf18c9814062912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 150
   rateOfFire: 2
   radius: 0.25
   range: 200

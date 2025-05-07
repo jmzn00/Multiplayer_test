@@ -56,7 +56,7 @@ public class PlayerControllerQuake : MonoBehaviourPun
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();       
+        rb = GetComponent<Rigidbody>();
         // Lock cursor
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
@@ -75,13 +75,14 @@ public class PlayerControllerQuake : MonoBehaviourPun
         
 
     }
+
     private void Update()
     {
         if (!photonView.IsMine) { return; }
         MouseLook();
         GetMovementInput();
         HandleCursorLock();
-        //Debug.Log(money);
+        DisplayFPS();
     }
 
     private void FixedUpdate()
@@ -130,16 +131,25 @@ public class PlayerControllerQuake : MonoBehaviourPun
     private void LateUpdate()
     {
         if (!photonView.IsMine) { return; }
-        if(MatchManager.instance.state == MatchManager.GameState.Playing) 
+
+        if (MatchManager.instance.state == MatchManager.GameState.Playing)
         {
             CameraFollow();
         }
-        else 
+        else
         {
             playerCamera.transform.position = MatchManager.instance.mapCamPoint.position;
             playerCamera.transform.rotation = MatchManager.instance.mapCamPoint.rotation;
         }
-        
+
+    }
+
+    private float deltaTime;
+    private void DisplayFPS() 
+    {
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        UI_Controller.instance.fpsText.text = $"FPS: {Mathf.Ceil(fps)}";
     }
     public float GetMagnitude() 
     {
@@ -163,7 +173,7 @@ public class PlayerControllerQuake : MonoBehaviourPun
 
         if(health <= 0) 
         {
-            int moneyValue = MoneyManager.instance.money;  // or whatever your player money variable is
+            int moneyValue = MoneyManager.instance.money;
             object[] instantiationData = new object[] { moneyValue };        
 
 
@@ -252,9 +262,11 @@ public class PlayerControllerQuake : MonoBehaviourPun
         Vector3 cameraPosition = new Vector3(playerModelPos.position.x, playerModelPos.position.y + 1.5f, playerModelPos.position.z) + playerModelPos.forward / 3;
         playerCamera.transform.position = cameraPosition;
 
-        playerCamera.transform.rotation = Quaternion.Euler(_inputRot.x, _inputRot.y, 0f);
-    }
+        //Quaternion targetRotation = Quaternion.Euler(_inputRot.x, _inputRot.y, 0f);
+        //Quaternion.Slerp(playerCamera.transform.rotation, targetRotation, Time.deltaTime * 20f);
 
+        playerCamera.transform.rotation = Quaternion.Euler(_inputRot.x, _inputRot.y, 0f);        
+    }
     void GetMovementInput()
     {
         float x = Input.GetAxisRaw(xAxisInput);
@@ -268,7 +280,6 @@ public class PlayerControllerQuake : MonoBehaviourPun
         if (Input.GetButtonUp(jumpButton))
             jumpPending = false;
     }
-
     void MouseLook()
     {
         _inputRot.y += Input.GetAxisRaw(inputMouseX) * mouseSensitivity;
@@ -281,7 +292,6 @@ public class PlayerControllerQuake : MonoBehaviourPun
 
         transform.rotation = Quaternion.Euler(0f, _inputRot.y, 0f);
     }
-
     private void GroundAccelerate()
     {
         float addSpeed = groundLimit - Vector3.Dot(vel, inputDir);
@@ -302,7 +312,6 @@ public class PlayerControllerQuake : MonoBehaviourPun
                 vel = vel.normalized * groundLimit;
         }
     }
-
     private void AirAccelerate()
     {
         Vector3 hVel = vel;
@@ -320,12 +329,10 @@ public class PlayerControllerQuake : MonoBehaviourPun
 
         vel += accelSpeed * inputDir;
     }
-
     private void ApplyFriction()
     {
         vel *= Mathf.Clamp01(1 - Time.deltaTime * friction);
     }
-
     private void Jump()
     {
         if (!ableToJump)
@@ -346,7 +353,6 @@ public class PlayerControllerQuake : MonoBehaviourPun
     {
         vel.y -= gravity * Time.deltaTime;
     }
-
     private void OnCollisionStay(Collision other)
     {
         // Check if any of the contacts has acceptable floor angle
@@ -360,7 +366,6 @@ public class PlayerControllerQuake : MonoBehaviourPun
             }
         }
     }
-
     // This is for avoiding multiple consecutive jump commands before leaving ground
     private IEnumerator JumpTimer()
     {

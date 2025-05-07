@@ -44,6 +44,8 @@ public class UI_Controller : MonoBehaviour
     public Slider beerSlider;
 
     public TMP_Text currentTrackText;
+
+    public TMP_Text fpsText;
     
 
 
